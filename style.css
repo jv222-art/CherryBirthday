@@ -109,3 +109,31 @@ body {
   line-height: 1.6;
   opacity: 0.95;
 }
+/* =========================
+   CHERRY ANIMATION FIELD
+   ========================= */
+
+.cherry-field {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.cherry {
+  position: absolute;
+  font-size: var(--size);
+  animation: floatCherry linear infinite;
+  opacity: 0.9;
+  filter: drop-shadow(0 4px 6px rgba(255, 0, 80, 0.3));
+}
+
+@keyframes floatCherry {
+  from {
+    transform: translateY(110vh) rotate(0deg);
+  }
+  to {
+    transform: translateY(-120vh) rotate(360deg);
+  }
+}
