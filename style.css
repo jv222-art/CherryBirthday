@@ -4,12 +4,11 @@
 
 body {
   margin: 0;
+  width: 100vw;
   height: 100vh;
   font-family: "Poppins", sans-serif;
   overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative;
 }
 
 /* Background */
@@ -22,6 +21,11 @@ body {
 
 /* Card */
 .card {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
   background: rgba(255, 255, 255, 0.55);
   backdrop-filter: blur(18px);
   padding: 50px 40px;
@@ -30,7 +34,7 @@ body {
   width: 90%;
   max-width: 520px;
   box-shadow: 0 25px 60px rgba(255, 0, 120, 0.35);
-  z-index: 5;
+  z-index: 10;
 }
 
 .card h1 {
@@ -112,3 +116,4 @@ body {
   pointer-events: none;
   z-index: 3;
 }
+
