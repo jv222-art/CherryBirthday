@@ -1,26 +1,22 @@
-/* =========================
-   DATE CONFIGURATION
-   ========================= */
+/* ======================
+   DATE CONFIG
+   ====================== */
 
-// CHANGE YEAR IF NEEDED
 const birthday = new Date("2026-01-28T00:00:00").getTime();
 
-/* =========================
-   ELEMENT REFERENCES
-   ========================= */
+/* ======================
+   ELEMENTS
+   ====================== */
 
 const song = document.getElementById("birthdaySong");
-const card = document.getElementById("card");
-const secretLink = document.getElementById("secretLink");
-
 const daysEl = document.getElementById("days");
 const hoursEl = document.getElementById("hours");
 const minutesEl = document.getElementById("minutes");
 const secondsEl = document.getElementById("seconds");
 
-/* =========================
-   COUNTDOWN LOGIC
-   ========================= */
+/* ======================
+   COUNTDOWN
+   ====================== */
 
 function updateCountdown() {
   const now = Date.now();
@@ -28,58 +24,47 @@ function updateCountdown() {
 
   if (diff <= 0) {
     document.getElementById("countdown").style.display = "none";
-
     document.getElementById("message").innerHTML =
-      "Happy Birthday Cherry 🍒<br><br>" +
-      "You don’t just make moments special.<br>" +
-      "You make them unforgettable 💖";
-
-    if (card) card.classList.add("active");
-    if (secretLink) secretLink.style.display = "inline-block";
+      "Happy Birthday Cherry 🍒<br>" +
+      "Today the world is softer because of you 💖";
 
     song.volume = 0.6;
     song.play();
-
     startConfetti();
     return;
   }
 
-  const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-  const m = Math.floor((diff / (1000 * 60)) % 60);
-  const s = Math.floor((diff / 1000) % 60);
-
-  daysEl.textContent = d;
-  hoursEl.textContent = h;
-  minutesEl.textContent = m;
-  secondsEl.textContent = s;
+  daysEl.textContent = Math.floor(diff / (1000 * 60 * 60 * 24));
+  hoursEl.textContent = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  minutesEl.textContent = Math.floor((diff / (1000 * 60)) % 60);
+  secondsEl.textContent = Math.floor((diff / 1000) % 60);
 }
 
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
-/* =========================
-   CONFETTI (ENHANCED)
-   ========================= */
+/* ======================
+   CONFETTI
+   ====================== */
 
 const canvas = document.getElementById("confetti");
 const ctx = canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.width = innerWidth;
+canvas.height = innerHeight;
 
 window.addEventListener("resize", () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
 });
 
 function startConfetti() {
-  const pieces = Array.from({ length: 320 }, () => ({
+  const pieces = Array.from({ length: 350 }, () => ({
     x: Math.random() * canvas.width,
     y: Math.random() * canvas.height,
     r: Math.random() * 6 + 3,
     d: Math.random() * 6 + 2,
-    tiltAngle: Math.random() * Math.PI
+    angle: Math.random() * Math.PI
   }));
 
   function draw() {
@@ -93,8 +78,8 @@ function startConfetti() {
       ctx.fill();
 
       p.y += p.d;
-      p.tiltAngle += 0.05;
-      p.x += Math.sin(p.tiltAngle);
+      p.angle += 0.05;
+      p.x += Math.sin(p.angle);
 
       if (p.y > canvas.height) {
         p.y = -10;
@@ -108,24 +93,22 @@ function startConfetti() {
   draw();
 }
 
-/* =========================
-   CHERRY FIELD GENERATOR
-   ========================= */
+/* ======================
+   CHERRY GENERATOR
+   ====================== */
 
 const cherryField = document.querySelector(".cherry-field");
 
-if (cherryField) {
-  for (let i = 0; i < 80; i++) {
-    const cherry = document.createElement("div");
-    cherry.className = "cherry";
-    cherry.textContent = "🍒";
+for (let i = 0; i < 90; i++) {
+  const cherry = document.createElement("div");
+  cherry.className = "cherry";
+  cherry.textContent = "🍒";
 
-    const size = Math.random() * 26 + 16;
-    cherry.style.fontSize = `${size}px`;
-    cherry.style.left = `${Math.random() * 100}vw`;
-    cherry.style.animationDuration = `${Math.random() * 25 + 15}s`;
-    cherry.style.animationDelay = `${Math.random() * -30}s`;
+  const size = Math.random() * 28 + 16;
+  cherry.style.fontSize = `${size}px`;
+  cherry.style.left = `${Math.random() * 100}vw`;
+  cherry.style.animationDuration = `${Math.random() * 25 + 15}s`;
+  cherry.style.animationDelay = `${Math.random() * -30}s`;
 
-    cherryField.appendChild(cherry);
-  }
+  cherryField.appendChild(cherry);
 }
